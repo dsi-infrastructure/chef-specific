@@ -22,8 +22,9 @@ package 'nano' do
 end
 
 confile = node['chef-specific.gov.pf']['squid3_confile']
+
 bash "squidCookbookBug" do
-  code "USER=$(echo $(grep '^[^#]*cache_effective_user' #{confile})| cut -d' ' -f2); DIR=$(echo $(grep '^[^#]*cache_dir' #{confile})| cut -d' ' -f3); [ ! -z \"$USER\" ] && [ ! -z \"$DIR\" ] && chown -R $USER $DIR"
+  code "USER=$(echo $(grep -s '^[^#]*cache_effective_user' #{confile})| cut -d' ' -f2); DIR=$(echo $(grep -s '^[^#]*cache_dir' #{confile})| cut -d' ' -f3); [ ! -z \"$USER\" ] && [ ! -z \"$DIR\" ] && chown -R $USER $DIR"
   only_if do ::File.exists?( confile ) end
 end
 
