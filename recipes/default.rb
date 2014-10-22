@@ -21,8 +21,9 @@ package 'nano' do
  action :remove
 end
 
+confile = node['chef-specific.gov.pf']['squid3_confile']
 bash "squidCookbookBug" do
-  code "USER=$(echo $(grep '^[^#]*cache_effective_user' /etc/squid3/squid.conf)| cut -d' ' -f2); DIR=$(echo $(grep '^[^#]*cache_dir' /etc/squid3/squid.conf)| cut -d' ' -f3); [ ! -z \"$USER\" ] && [ ! -z \"$DIR\" ] && chown -R $USER $DIR"
-  only_if do ::File.exists?("/etc/squid3/squid.conf") end
+  code "USER=$(echo $(grep '^[^#]*cache_effective_user' #{confile})| cut -d' ' -f2); DIR=$(echo $(grep '^[^#]*cache_dir' #{confile})| cut -d' ' -f3); [ ! -z \"$USER\" ] && [ ! -z \"$DIR\" ] && chown -R $USER $DIR"
+  only_if do ::File.exists?( confile ) end
 end
 
