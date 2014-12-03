@@ -28,3 +28,8 @@ bash "squidCookbookBug" do
   only_if do ::File.exists?( confile ) end
 end
 
+bash "apt-cacher-ng" do
+  code "chown -R apt-cacher-ng: /var/cache/apt-cacher-ng"
+  only_if do ::File.exists?( "/var/cache/apt-cacher-ng" ) end
+end
+
