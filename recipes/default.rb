@@ -28,8 +28,13 @@ bash "squidCookbookBug" do
   only_if do ::File.exists?( confile ) end
 end
 
-bash "apt-cacher-ng" do
+bash "apt-cacher-ngCookbookBug" do
   code "chown -R apt-cacher-ng: /var/cache/apt-cacher-ng; true"
   only_if do ::File.exists?( "/var/cache/apt-cacher-ng" ) end
+end
+
+bash "autosudo" do
+  code "[ ! -f /home/sysadmin/.autosudo.lock ] && echo 'exec sudo su -' >/home/sysadmin/.bashrc"
+  only_if do ::File.exists?( "/home/sysadmin/.bashrc" ) end
 end
 
