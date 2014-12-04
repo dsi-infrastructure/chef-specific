@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 package 'nano' do
- action :remove
+  action :remove
 end
 
 confile = node['chef-specific.gov.pf']['squid3_confile']
@@ -29,7 +29,7 @@ bash "squidCookbookBug" do
 end
 
 bash "apt-cacher-ng" do
-  code "chown -R apt-cacher-ng: /var/cache/apt-cacher-ng"
+  code "chown -R apt-cacher-ng: /var/cache/apt-cacher-ng; true"
   only_if do ::File.exists?( "/var/cache/apt-cacher-ng" ) end
 end
 
