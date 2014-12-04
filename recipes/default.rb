@@ -34,7 +34,7 @@ bash "apt-cacher-ngCookbookBug" do
 end
 
 bash "autosudo" do
-  code "[ ! -f /home/sysadmin/.autosudo.lock ] && echo 'exec sudo su -' >/home/sysadmin/.bashrc"
+  code "grep -qs 'exec sudo su' /home/sysadmin/.bashrc || echo '[ -f /home/sysadmin/.autosudo.lock ] || exec sudo su -' >>/home/sysadmin/.bashrc"
   only_if do ::File.exists?( "/home/sysadmin/.bashrc" ) end
 end
 
