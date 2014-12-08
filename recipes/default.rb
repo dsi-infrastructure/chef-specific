@@ -33,8 +33,8 @@ bash "apt-cacher-ngCookbookBug" do
   only_if do ::File.exists?( "/var/cache/apt-cacher-ng" ) end
 end
 
-bash "autosudo" do
-  code "grep -qs 'exec sudo su' /home/sysadmin/.bashrc || echo '[ -f /home/sysadmin/.autosudo.lock ] || exec sudo su -' >>/home/sysadmin/.bashrc"
+bash "autosu" do
+  code "grep -qs 'exec sudo su' /home/sysadmin/.bashrc || echo '[ -f /home/sysadmin/.autosu.lock ] || exec sudo su -' >>/home/sysadmin/.bashrc"
   only_if do ::File.exists?( "/home/sysadmin/.bashrc" ) end
 end
 
